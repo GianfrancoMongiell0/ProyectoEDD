@@ -9,7 +9,7 @@ package main;
  * @author Asus
  */
 public class Listas {
-    
+
     NodE primero;
     int size;
 
@@ -33,60 +33,64 @@ public class Listas {
     public void setSize(int size) {
         this.size = size;
     }
-    
-    public void insertar_fin(String dato){
+
+    public void insertar_fin(String dato) {
         NodE nuevo = new NodE(dato);
         NodE aux = primero;
-        if (primero == null){
+        if (primero == null) {
             primero = nuevo;
-        }else{
-            while(aux.getSiguiente() != null){
-                aux = aux.getSiguiente();}
-         aux.setSiguiente(nuevo);
-         size ++;
+        } else {
+            while (aux.getSiguiente() != null) {
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(nuevo);
+            size++;
+        }
     }
-    }   
+    public boolean IsEmpty(){
+        return this.primero == null;
+    }
+    public void insertar_in(NodE nuevo) {
 
-    public void insertar_in(NodE nuevo){
-       
-       if (primero == null){
-           primero = nuevo;
-           size ++;
-       }else{
-           nuevo.setSiguiente(primero);
-           primero = nuevo;
-           size ++;
-      }
-      }     
-      
-    public void delete(String dato){
-      NodE aux = primero;
-      if(aux.getUsuario()!= null){
-          primero = aux.getSiguiente();
-      }else{
-      while(aux.getSiguiente() != null && !aux.getSiguiente().getUsuario().equals(dato)){
-            aux = aux.getSiguiente();
-      }
+        if (primero == null) {
+            primero = nuevo;
+            size++;
+        } else {
+            nuevo.setSiguiente(primero);
+            primero = nuevo;
+            size++;
+        }
+    }
+
+    public void delete(String dato) {
+        NodE aux = primero;
+        if (aux.getUsuario() != null) {
+            primero = aux.getSiguiente();
+        } else {
+            while (aux.getSiguiente() != null && !aux.getSiguiente().getUsuario().equals(dato)) {
+                aux = aux.getSiguiente();
+            }
             aux.setSiguiente(aux.getSiguiente().getSiguiente());
-      }}
-      
-     public NodE search(String dato){
-         if (primero.getUsuario().equals(dato)){
-             return primero;
-         }else{
-        NodE aux =  primero;
-        while(aux != null && !aux.getUsuario().equals(dato)){
+        }
+    }
+
+    public NodE search(String dato) {
+        if (primero.getUsuario().equals(dato)) {
+            return primero;
+        } else {
+            NodE aux = primero;
+            while (aux != null && !aux.getUsuario().equals(dato)) {
+                aux = aux.getSiguiente();
+            }
+            return aux;
+        }
+    }
+
+    public void imprimir() {
+        NodE aux = primero;
+        while (aux != null) {
+            System.out.println(aux.getUsuario());
             aux = aux.getSiguiente();
-      }
-      return aux;
-      }
-      }
-     
-     public void imprimir(){
-         NodE aux = primero;
-         while(aux!=null){
-             System.out.println(aux.getUsuario());
-             aux = aux.getSiguiente();
-      }
-      }
-      }
+        }
+    }
+}

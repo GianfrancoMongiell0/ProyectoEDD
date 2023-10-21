@@ -9,8 +9,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
-import main.ListaSimple;
-import main.NodoSimple;
+import main.Listas;
+import main.NodE;
 
 /**
  *
@@ -18,13 +18,13 @@ import main.NodoSimple;
  */
 public class ArchivoTxt {
 
-    public void EscribirTxt(ListaSimple usuarios) {
+    public void EscribirTxt(Listas usuarios) {
         String UsuariosActuales = "";
-        if (!usuarios.Esvacia()) {
-            NodoSimple pAux = usuarios.getpFirst();
+        if (!usuarios.IsEmpty()) {
+            NodE pAux = usuarios.getPrimero();
             for (int i = 0; i < usuarios.getSize(); i++) {
-                UsuariosActuales += pAux.getData() + "\n";
-                pAux = pAux.getpNext();
+                UsuariosActuales += pAux.getUsuario()+ "\n";
+                pAux = pAux.getSiguiente();
             }
         }
         try {
@@ -43,8 +43,8 @@ public class ArchivoTxt {
         }
     }
 
-    public ListaSimple LeerTxt() {
-        ListaSimple usuarios = new ListaSimple();
+    public Listas LeerTxt() {
+        Listas usuarios = new Listas();
         String line;
         String usuarios_txt = "";
         String path = "test\\usuarios.txt";
@@ -65,7 +65,7 @@ public class ArchivoTxt {
                     String[] usuario_split = usuarios_txt.split("\n");
                     for (int i = 0; i < usuario_split.length; i++) {
                         String[] usuario = usuario_split[i].split(",");
-                        usuarios.AgregarFinal(usuario[0]);
+                        usuarios.insertar_fin(usuario[0]);
                     }
                 }
                 br.close();
