@@ -9,13 +9,14 @@ package main;
  * @author Asus
  */
 public class NodE {
-     String usuario;
+
+    String usuario;
     NodE siguiente;
 
     public NodE(String usuario) {
         this.usuario = usuario;
         this.siguiente = null;
-        
+
     }
 
     public String getUsuario() {
@@ -35,4 +36,3 @@ public class NodE {
     }
 
 }
-
