@@ -53,15 +53,14 @@ public class Proyecto {
         g.imprimir_grafo();
         
         ArchivoTxt txt =new ArchivoTxt();   
-        ListaSimple usuarios = new ListaSimple();
+        Listas usuarios = new Listas();
         
-        usuarios.AgregarFinal("Pablo");
-        usuarios.AgregarFinal("Kevin");
-        usuarios.AgregarFinal("Juan");
+        usuarios.insertar_fin("Pablo");
+        usuarios.insertar_fin("Kevin");
+        usuarios.insertar_fin("Juan");
         txt.EscribirTxt(usuarios);
-        ListaSimple usuarios2 = txt.LeerTxt();
-        usuarios2.Imprimir();
-        
+        Listas usuarios2 = txt.LeerTxt();
+        usuarios2.imprimir();
         
         //ClaseFrame miVentana = new ClaseFrame();
         //miVentana.setVisible(true);

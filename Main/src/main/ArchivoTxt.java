@@ -4,13 +4,14 @@
  */
 package main;
 
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
-import main.Listas;
-import main.NodE;
 
 /**
  *
@@ -28,9 +29,9 @@ public class ArchivoTxt {
             }
         }
         try {
-            PrintWriter pw = new PrintWriter("test\\usuarios.txt");
-            pw.print(UsuariosActuales);
-            pw.close();
+            try (PrintWriter pw = new PrintWriter("test\\usuarios.txt")) {
+                pw.print(UsuariosActuales);
+            }
             //INTERFAZ GRAFICA
             //INTERFAZ GRAFICA
             //INTERFAZ GRAFICA
@@ -38,7 +39,7 @@ public class ArchivoTxt {
             //INTERFAZ GRAFICA
             //INTERFAZ GRAFICA
             //INTERFAZ GRAFICA
-        } catch (Exception e) {
+        } catch (HeadlessException | FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, e, "ERROR", 0);
         }
     }
@@ -55,24 +56,24 @@ public class ArchivoTxt {
 
             } else {
                 FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr);
-                while ((line = br.readLine()) != null) {
-                    if (!line.isEmpty()) {
-                        usuarios_txt += line + "\n";
+                try (BufferedReader br = new BufferedReader(fr)) {
+                    while ((line = br.readLine()) != null) {
+                        if (!line.isEmpty()) {
+                            usuarios_txt += line + "\n";
+                        }
+                    }
+                    if (!"".equals(usuarios_txt)) {
+                        String[] usuario_split = usuarios_txt.split("\n");
+                        for (String usuario_split1 : usuario_split) {
+                            String[] usuario = usuario_split1.split(",");
+                            usuarios.insertar_fin(usuario[0]);
+                        }
                     }
                 }
-                if (!"".equals(usuarios_txt)) {
-                    String[] usuario_split = usuarios_txt.split("\n");
-                    for (int i = 0; i < usuario_split.length; i++) {
-                        String[] usuario = usuario_split[i].split(",");
-                        usuarios.insertar_fin(usuario[0]);
-                    }
-                }
-                br.close();
                 JOptionPane.showMessageDialog(null, "Lectura exitosa");
 
             }
-        } catch (Exception e) {
+        } catch (HeadlessException | IOException e) {
             JOptionPane.showMessageDialog(null, "error al momento de leer los clientes");
         }
         return usuarios;
