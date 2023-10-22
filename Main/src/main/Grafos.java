@@ -10,19 +10,19 @@ package main;
  */
 public class Grafos {
     
-    Lista [] usuarios;
+    Listas [] usuarios;
     int max_usuarios;
 
     public Grafos(int max) {
-        this.usuarios = new Lista [max];
+        this.usuarios = new Listas [max];
         this.max_usuarios = max;
     }
 
-    public Lista[] getUsuarios() {
+    public Listas[] getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(Lista[] usuarios) {
+    public void setUsuarios(Listas[] usuarios) {
         this.usuarios = usuarios;
     }
 
@@ -38,7 +38,7 @@ public class Grafos {
         boolean enc =  false;
         for (int n = 0; n < max_usuarios; n++) {
                   if (usuarios[n]== null){
-                  usuarios[n] = new Lista();
+                  usuarios[n] = new Listas();
                   usuarios[n].primero = nodo;
                   enc = true;
                   break;
@@ -47,12 +47,12 @@ public class Grafos {
         if (!enc){nuevo_grafo(nodo);}}
         
          public void nuevo_grafo(NodE nodo){
-            Lista[] nuevo = new Lista[max_usuarios +1];
+            Listas[] nuevo = new Listas[max_usuarios +1];
             for (int n= 0; n < max_usuarios; n++) {
-                            nuevo[n] =new Lista();
+                            nuevo[n] =new Listas();
                   nuevo[n].insertar_in(this.usuarios[n].primero);
      }
-           nuevo[max_usuarios] = new Lista();
+           nuevo[max_usuarios] = new Listas();
            nuevo[max_usuarios].insertar_in(nodo);
                   this.usuarios = nuevo;
                   this.max_usuarios ++;
