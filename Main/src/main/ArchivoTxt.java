@@ -4,15 +4,15 @@
  */
 package main;
 
-import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import main.Listas;
+import main.NodE;
 
 /**
  *
@@ -51,7 +51,8 @@ public class ArchivoTxt {
                     String parte2 = parte[1];
                     grafito.nuevo_seguidor(parte1, parte2);}
                         
-                }grafito.imprimir_grafo();
+                }
+                JOptionPane.showMessageDialog(null, "Cargado exitosamente");
             } catch (IOException e) {
 // Manejar la excepción de entrada/salida
                 e.printStackTrace();
@@ -69,19 +70,6 @@ public class ArchivoTxt {
             }
         }
         try {
-<<<<<<< HEAD
-            try (PrintWriter pw = new PrintWriter("test\\usuarios.txt")) {
-                pw.print(UsuariosActuales);
-            }
-            //INTERFAZ GRAFICA
-            //INTERFAZ GRAFICA
-            //INTERFAZ GRAFICA
-            JOptionPane.showMessageDialog(null, "Guarado exitoso");
-            //INTERFAZ GRAFICA
-            //INTERFAZ GRAFICA
-            //INTERFAZ GRAFICA
-        } catch (HeadlessException | FileNotFoundException e) {
-=======
             PrintWriter pw = new PrintWriter("test\\usuarios.txt");
             pw.print(UsuariosActuales);
             pw.close();
@@ -89,7 +77,6 @@ public class ArchivoTxt {
             JOptionPane.showMessageDialog(null, "Guarado exitoso");
             
         } catch (Exception e) {
->>>>>>> 5aed82951f053725b4341dd3b20cddaf2f638cdd
             JOptionPane.showMessageDialog(null, e, "ERROR", 0);
         }
     }
@@ -106,27 +93,26 @@ public class ArchivoTxt {
 
             } else {
                 FileReader fr = new FileReader(file);
-                try (BufferedReader br = new BufferedReader(fr)) {
-                    while ((line = br.readLine()) != null) {
-                        if (!line.isEmpty()) {
-                            usuarios_txt += line + "\n";
-                        }
-                    }
-                    if (!"".equals(usuarios_txt)) {
-                        String[] usuario_split = usuarios_txt.split("\n");
-                        for (String usuario_split1 : usuario_split) {
-                            String[] usuario = usuario_split1.split(",");
-                            usuarios.insertar_fin(usuario[0]);
-                        }
+                BufferedReader br = new BufferedReader(fr);
+                while ((line = br.readLine()) != null) {
+                    if (!line.isEmpty()) {
+                        usuarios_txt += line + "\n";
                     }
                 }
+                if (!"".equals(usuarios_txt)) {
+                    String[] usuario_split = usuarios_txt.split("\n");
+                    for (int i = 0; i < usuario_split.length; i++) {
+                        String[] usuario = usuario_split[i].split(",");
+                        usuarios.insertar_fin(usuario[0]);
+                    }
+                }
+                br.close();
                 JOptionPane.showMessageDialog(null, "Lectura exitosa");
 
             }
-        } catch (HeadlessException | IOException e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error al momento de leer los clientes");
         }
-        return usuarios;
+        return usuarios;        
     }
-
 }
