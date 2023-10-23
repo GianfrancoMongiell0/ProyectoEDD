@@ -1,8 +1,6 @@
 package main;
 
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
 
 public class main {
 
@@ -20,53 +18,34 @@ public class main {
             
              */
             try {
-                Grafos g = new Grafos(0);
 
-                String respuesta1 = JOptionPane.showInputDialog("Seleccione:  \n1. CARGAR ARCHIVO TXT\n2. MODIFICAR EL GRAFO\n3.ACTUALIZAZR REPOSITORIO\n4. MOSTRAR GRAFO\n5. INDENTIFICACION DE COMPONENTES FUERTEMENTE CONECTADOS");
-                int num = Integer.parseInt(respuesta1);
+                String respuesta1 = JOptionPane.showInputDialog("Seleccione:  \n1. CARGAR ARCHIVO TXT\n2. MODIFICAR EL GRAFO\n3.ACTUALIZAZR REPOSITORIO\n4. MOSTRAR GRAFO\n5. INDENTIFICACION DE COMPONENTES FUERTEMENTE CONECTADOS\n6. Salir");
+                int num1 = Integer.parseInt(respuesta1);
 
-                while (1 <= num && num <= 6) {
+                if (num1 == 1) {
 
-                    if (respuesta1 == "1") {
+                    ArchivoTxt archivo = new ArchivoTxt();
+                    archivo.LectorChooser();
+
+                } else if (num1 == 2) {
+                    String respuesta2 = JOptionPane.showInputDialog("Seleccione: \n1. Eliminar Usuario\n2.Agregar Usuario\n3. Salir");
+                    int num2 = Integer.parseInt(respuesta2);
+
+                    if (num2 == 1) {
+                        String eliminar = JOptionPane.showInputDialog("Ingrese el usuario que desea eliminar");
                         
-                        ArchivoTxt lector = new ArchivoTxt();
-                        lector.LectorChooser();
-
-                    } else if (respuesta1 == "2") {
-
-                        try {
-
-//                             INTERFAZ 
-                            String respuesta3 = JOptionPane.showInputDialog("Seleccione: \n1. Eliminar Usuario\n2.Agregar Usuario\n3. Salir");
-                            int num1 = Integer.parseInt(respuesta3);
-//                            CARGAR GRAFO.TXT
-                            while (1 <= num1 && num1 <= 3) {
-
-                                if (num == 1) {
-                                    
-                                    
-
-                                } else if (num == 2) {
-
-                                } else {
-
-                                    break;
-
-                                }
-                            }
-                        } catch (Exception e) {
-                        }
-
-                    } else if (num == 3) {
-
-                    } else if (num == 4) {
-
-                    } else if (num == 5) {
-
+                        
+                    } else if (num2 == 2) {
+                        ClaseFrame miVentana = new ClaseFrame();
+                        miVentana.setVisible(true);
                     } else {
                         break;
                     }
+
+                } else {
+                    System.exit(0);
                 }
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Por favor solo ingresa numero de 1 al 6");
             }

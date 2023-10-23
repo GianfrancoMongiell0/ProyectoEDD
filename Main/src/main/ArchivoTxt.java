@@ -20,8 +20,8 @@ import main.NodE;
  */
 public class ArchivoTxt {
 
-    public void LectorChooser(){
-   JFileChooser jfc = new JFileChooser();
+    public void LectorChooser() {
+        JFileChooser jfc = new JFileChooser();
         jfc.setCurrentDirectory(new File("C:\\Users\\usuario\\Desktop"));
 
 // Mostrar el diálogo de selección de archivos y obtener el valor de retorno
@@ -35,36 +35,39 @@ public class ArchivoTxt {
 // Crear un objeto BufferedReader para leer el archivo
             try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
 // Leer las líneas del archivo y mostrarlas por pantalla
+
                 Grafos grafito = new Grafos(2);
 
                 String linea;
                 while ((linea = br.readLine()) != null) {
-                                            
+
                     if (linea.contains("@") && !linea.contains(",")) {
                         NodE nodito = new NodE(linea);
                         grafito.insertar_usuario(nodito);
                         linea = " ";
 
-                    } else if(linea.contains("@") && linea.contains(","))  {
-                    String[] parte = linea.split(",");
-                    String parte1 = parte[0];
-                    String parte2 = parte[1];
-                    grafito.nuevo_seguidor(parte1, parte2);}
-                        
-                }grafito.imprimir_grafo();
+                    } else if (linea.contains("@") && linea.contains(",")) {
+                        String[] parte = linea.split(",");
+                        String parte1 = parte[0];
+                        String parte2 = parte[1];
+                        grafito.nuevo_seguidor(parte1, parte2);
+                    }
+
+                }
+                JOptionPane.showMessageDialog(null, "Cargado exitosamente");
             } catch (IOException e) {
 // Manejar la excepción de entrada/salida
                 e.printStackTrace();
             }
         }
     }
-    
+
     public void EscribirTxt(Listas usuarios) {
         String UsuariosActuales = "";
         if (!usuarios.IsEmpty()) {
             NodE pAux = usuarios.getPrimero();
             for (int i = 0; i < usuarios.getSize(); i++) {
-                UsuariosActuales += pAux.getUsuario()+ "\n";
+                UsuariosActuales += pAux.getUsuario() + "\n";
                 pAux = pAux.getSiguiente();
             }
         }
@@ -72,9 +75,9 @@ public class ArchivoTxt {
             PrintWriter pw = new PrintWriter("test\\usuarios.txt");
             pw.print(UsuariosActuales);
             pw.close();
-            
+
             JOptionPane.showMessageDialog(null, "Guarado exitoso");
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "ERROR", 0);
         }
