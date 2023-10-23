@@ -33,8 +33,7 @@ public class main {
 
                     if (num2 == 1) {
                         String eliminar = JOptionPane.showInputDialog("Ingrese el usuario que desea eliminar");
-                        
-                        
+
                     } else if (num2 == 2) {
                         ClaseFrame miVentana = new ClaseFrame();
                         miVentana.setVisible(true);
