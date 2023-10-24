@@ -64,14 +64,20 @@ public class Listas {
 
     public void delete(String dato) {
         NodE aux = primero;
-        if (aux.getUsuario() != null) {
-            primero = aux.getSiguiente();
-        } else {
-            while (aux.getSiguiente() != null && !aux.getSiguiente().getUsuario().equals(dato)) {
-                aux = aux.getSiguiente();
+        
+        boolean encontrado = false;
+        while(aux != null){
+            if(aux.getSiguiente()!= null && aux.getSiguiente().getUsuario().equals(dato)){
+                encontrado = true;
+                break;
             }
+            aux = aux.getSiguiente();
+        }
+        if (encontrado){
             aux.setSiguiente(aux.getSiguiente().getSiguiente());
         }
+        
+        
     }
 
     public NodE search(String dato) {

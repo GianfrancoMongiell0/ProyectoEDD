@@ -20,7 +20,7 @@ import main.NodE;
  */
 public class ArchivoTxt {
 
-    public void LectorChooser(){
+    public Grafos LectorChooser(Grafos grafito){
    JFileChooser jfc = new JFileChooser();
         jfc.setCurrentDirectory(new File("C:\\Users\\usuario\\Desktop"));
 
@@ -35,18 +35,17 @@ public class ArchivoTxt {
 // Crear un objeto BufferedReader para leer el archivo
             try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
 // Leer las líneas del archivo y mostrarlas por pantalla
-                Grafos grafito = new Grafos(2);
 
                 String linea;
                 while ((linea = br.readLine()) != null) {
-                                            
+//                    System.out.println("linea");
                     if (linea.contains("@") && !linea.contains(",")) {
                         NodE nodito = new NodE(linea);
                         grafito.insertar_usuario(nodito);
                         linea = " ";
 
                     } else if(linea.contains("@") && linea.contains(","))  {
-                    String[] parte = linea.split(",");
+                    String[] parte = linea.split(",");  
                     String parte1 = parte[0];
                     String parte2 = parte[1];
                     grafito.nuevo_seguidor(parte1, parte2);}
@@ -54,10 +53,12 @@ public class ArchivoTxt {
                 }
                 JOptionPane.showMessageDialog(null, "Cargado exitosamente");
             } catch (IOException e) {
+                System.out.println(e);
 // Manejar la excepción de entrada/salida
                 e.printStackTrace();
             }
         }
+        return grafito;
     }
     
     public void EscribirTxt(Listas usuarios) {
@@ -113,6 +114,8 @@ public class ArchivoTxt {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error al momento de leer los clientes");
         }
-        return usuarios;        
-    }
+        return usuarios;
+
+
+}
 }
