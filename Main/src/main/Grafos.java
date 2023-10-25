@@ -41,7 +41,7 @@ public class Grafos {
                 usuarios[n] = new Listas();
                 usuarios[n].primero = nodo;
                 enc = true;
-                System.out.println("agregado");
+                
                 break;
             }
         }
