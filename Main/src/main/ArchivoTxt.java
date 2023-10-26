@@ -6,13 +6,12 @@ package main;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import main.Listas;
-import main.NodE;
 
 /**
  *
@@ -20,8 +19,9 @@ import main.NodE;
  */
 public class ArchivoTxt {
 
-    public Grafos LectorChooser(Grafos grafito){
+    public Grafos LectorChooser(Grafos grafito) throws FileNotFoundException, IOException{
    JFileChooser jfc = new JFileChooser();
+        
         jfc.setCurrentDirectory(new File("C:\\Users\\usuario\\Desktop"));
 
 // Mostrar el diálogo de selección de archivos y obtener el valor de retorno
@@ -38,12 +38,18 @@ public class ArchivoTxt {
 
                 String linea;
                 while ((linea = br.readLine()) != null) {
-//                    System.out.println("linea");
                     if (linea.contains("@") && !linea.contains(",")) {
-                        NodE nodito = new NodE(linea);
-                        grafito.insertar_usuario(nodito);
-                        linea = " ";
-
+                    NodE nodito = new NodE(linea.trim()); // trim() elimina espacios en blanco al principio y al final
+                    grafito.insertar_usuario(nodito);
+                    linea = " ";
+    }           else if (linea.contains("@") && linea.contains(",")) {
+                    String[] parte = linea.split(",");
+                        if (parte.length == 2) {
+                    String parte1 = parte[0].trim();
+                    String parte2 = parte[1].trim();
+                    grafito.nuevo_seguidor(parte1, parte2);
+        }
+    
                     } else if(linea.contains("@") && linea.contains(","))  {
                     String[] parte = linea.split(",");  
                     String parte1 = parte[0];
@@ -75,7 +81,7 @@ public class ArchivoTxt {
             pw.print(UsuariosActuales);
             pw.close();
             
-            JOptionPane.showMessageDialog(null, "Guarado exitoso");
+            JOptionPane.showMessageDialog(null, "Guardado exitoso");
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "ERROR", 0);
@@ -112,10 +118,11 @@ public class ArchivoTxt {
 
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error al momento de leer los clientes");
+            JOptionPane.showMessageDialog(null, "Error al momento de leer los usuarios");
         }
         return usuarios;
 
 
 }
 }
+
