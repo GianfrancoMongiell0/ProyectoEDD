@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Asus
@@ -54,7 +59,11 @@ public class Interfaz extends javax.swing.JFrame {
     private void leer_ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leer_ArchivoActionPerformed
         // TODO add your handling code here:
          ArchivoTxt archivo = new ArchivoTxt();
-         gr = archivo.LectorChooser(gr);
+            try {
+                gr = archivo.LectorChooser(gr);
+            } catch (IOException ex) {
+                Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            }
 //                    System.out.println(gr.usuarios[0].primero.usuario);
          gr.imprimir_grafo();
     }//GEN-LAST:event_leer_ArchivoActionPerformed

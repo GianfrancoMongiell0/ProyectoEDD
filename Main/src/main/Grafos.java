@@ -4,6 +4,7 @@
  */
 package main;
 
+
 /**
  *
  * @author Asus
@@ -41,7 +42,6 @@ public class Grafos {
                 usuarios[n] = new Listas();
                 usuarios[n].primero = nodo;
                 enc = true;
-                
                 break;
             }
         }
@@ -73,6 +73,22 @@ public class Grafos {
         }
     }
 
+    public void eliminar_seguidor(String usuario, String seguidor){
+        Listas us = null;
+        boolean encontrado = false;
+        for (int i = 0; i < max_usuarios; i++) {
+            if(usuarios[i].primero.getUsuario().equals(usuario)){
+                us = usuarios[i];
+        }else if (usuarios[i].primero.getUsuario().equals(seguidor)){
+            encontrado = true;
+        }
+            if (encontrado && us!=null){break;}
+        }
+        if (encontrado && us!=null){
+        us.delete(seguidor);}
+    }
+
+  
     public void nuevo_seguidor(String dato, String seguidor) {
         for (int n = 0; n < max_usuarios; n++) {
             if (this.usuarios[n].primero.getUsuario().equals(dato)) {
@@ -105,3 +121,5 @@ public class Grafos {
         }
     }
 }
+
+
