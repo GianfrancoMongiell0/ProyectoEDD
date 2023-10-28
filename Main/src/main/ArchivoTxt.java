@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JFileChooser;
@@ -18,6 +19,8 @@ import javax.swing.JOptionPane;
  * @author gianf
  */
 public class ArchivoTxt {
+    
+    public ArchivoTxt(){}
 
     public Grafos LectorChooser(Grafos grafito) throws FileNotFoundException, IOException{
    JFileChooser jfc = new JFileChooser();
@@ -124,5 +127,43 @@ public class ArchivoTxt {
 
 
 }
+    public void escribirEnArchivo(Grafos grafo, String nombreArchivo) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
+            // Escribir la lista de usuarios
+            writer.println("usuarios");
+            for (int i = 0; i < grafo.max_usuarios; i++) {
+                if (grafo.getUsuarios()[i] != null) {
+                    writer.println(grafo.getUsuarios()[i].getPrimero().getUsuario());
+                }
+            }
+
+            // Escribir las relaciones
+            writer.println("relaciones");
+            for (int i = 0; i < grafo.max_usuarios; i++) {
+                if (grafo.getUsuarios()[i] != null) {
+                    String usuario = grafo.getUsuarios()[i].getPrimero().getUsuario();
+                    NodE aux = grafo.getUsuarios()[i].getPrimero().getSiguiente();
+
+                    while (aux != null) {
+                        writer.println(usuario + ", " + aux.getUsuario());
+                        aux = aux.getSiguiente();
+                    }
+                }
+            }
+
+            System.out.println("Archivo " + nombreArchivo + " creado exitosamente.");
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo: " + e.getMessage());
+        }
+    }
+    
+    public String validar(String usuario){
+        String user = usuario;
+        if (!usuario.contains("@")){
+             user = "@" + usuario;
+        }
+        return user;
+    }
 }
+
 

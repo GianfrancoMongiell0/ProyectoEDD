@@ -4,8 +4,6 @@ package main;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import main.ArchivoTxt;
-import main.Grafos;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,11 +21,11 @@ public class Ventana3 extends javax.swing.JFrame {
     /**
      * Creates new form Ventana3
      */
-    public Ventana3(Grafos grafos, String direccion) {
+    public Ventana3(Grafos grafos) {
         initComponents();
          this.setVisible(true);
         g=grafos;
-        direccion_archivo = direccion;
+        this.graf.setText(g.imprimir_grafo());
     }
 
     /**
@@ -52,12 +50,18 @@ public class Ventana3 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Dialog", 3, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("RELACIONES");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 180, 30));
 
+        jButton2.setBackground(new java.awt.Color(0, 0, 0));
+        jButton2.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(204, 204, 204));
         jButton2.setText("Añadir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +70,9 @@ public class Ventana3 extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
 
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
+        jButton3.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(204, 204, 204));
         jButton3.setText("Eliminar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +95,9 @@ public class Ventana3 extends javax.swing.JFrame {
         });
         jPanel1.add(usuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 170, -1));
 
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +106,9 @@ public class Ventana3 extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, -1, -1));
 
+        graf.setBackground(new java.awt.Color(0, 0, 0));
         graf.setColumns(20);
+        graf.setForeground(new java.awt.Color(204, 204, 204));
         graf.setRows(5);
         jScrollPane1.setViewportView(graf);
 
@@ -109,7 +121,15 @@ public class Ventana3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        g.nuevo_seguidor(this.usuario1.getText(), this.usuario2.getText());
+                 String u =  a.validar(usuario1.getText());
+         String z =  a.validar(usuario2.getText());
+
+
+        g.nuevo_seguidor(u, z);
+        
+        a.escribirEnArchivo(g, "usuarios.txt");
+        this.graf.setText(g.imprimir_grafo());
+
         g.imprimir_grafo();
 //        a.EscribirTxt(direccion_archivo);
 
@@ -125,7 +145,14 @@ public class Ventana3 extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        g.eliminar_seguidor(usuario1.getText(), usuario2.getText());
+         String u =  a.validar(usuario1.getText());
+         String z =  a.validar(usuario2.getText());
+
+
+        g.eliminar_seguidor(u, z);
+                        a.escribirEnArchivo(g, "usuarios.txt");
+        this.graf.setText(g.imprimir_grafo());
+
         g.imprimir_grafo();
 //        a.EscribirTxt(direccion_archivo);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -134,10 +161,11 @@ public class Ventana3 extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         try {
-            Ventana v  = new Ventana(g, direccion_archivo);
+            Ventana v  = new Ventana(g);
         } catch (IOException ex) {
             Logger.getLogger(Ventana3.class.getName()).log(Level.SEVERE, null, ex);
         }
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -170,7 +198,7 @@ public class Ventana3 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventana3(g, direccion_archivo).setVisible(true);
+                new Ventana3(g).setVisible(true);
             }
         });
     }

@@ -3,7 +3,6 @@ package main;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import main.Grafos;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,20 +16,17 @@ public class Ventana extends javax.swing.JFrame {
 
     public static Grafos g;
     public static String direccion_archivo;
-    private Grafos grafo;
 
     /**
      * Creates new form Ventana
      */
-    public Ventana(Grafos grafos, String direccion) throws IOException {
+    public Ventana(Grafos grafos) throws IOException {
         initComponents();
         this.setVisible(true);
-
+        g = grafos;
         ArchivoTxt a = new ArchivoTxt();
-        g = a.LectorChooser(grafos);
-       direccion_archivo = direccion;
-    }
-
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,78 +36,114 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         buscar = new javax.swing.JButton();
         users = new javax.swing.JButton();
         relaciones = new javax.swing.JButton();
         graficar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jLabel1.setBackground(new java.awt.Color(0, 51, 102));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/v617batch2-kul-05-technology.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+
+        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        buscar.setBackground(new java.awt.Color(0, 0, 0));
+        buscar.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        buscar.setForeground(new java.awt.Color(204, 204, 204));
         buscar.setText("Buscar Archivo");
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarActionPerformed(evt);
             }
         });
-        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, -1, -1));
+        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
+        users.setBackground(new java.awt.Color(0, 0, 0));
+        users.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        users.setForeground(new java.awt.Color(204, 204, 204));
         users.setText("Usuarios");
         users.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usersActionPerformed(evt);
             }
         });
-        jPanel1.add(users, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, -1, -1));
+        jPanel1.add(users, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
 
+        relaciones.setBackground(new java.awt.Color(0, 0, 0));
+        relaciones.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        relaciones.setForeground(new java.awt.Color(204, 204, 204));
         relaciones.setText("Relaciones");
         relaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 relacionesActionPerformed(evt);
             }
         });
-        jPanel1.add(relaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
+        jPanel1.add(relaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
 
+        graficar.setBackground(new java.awt.Color(0, 0, 0));
+        graficar.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        graficar.setForeground(new java.awt.Color(204, 204, 204));
         graficar.setText("Graficar");
         graficar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 graficarActionPerformed(evt);
             }
         });
-        jPanel1.add(graficar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, -1, -1));
+        jPanel1.add(graficar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, -5, 640, 380));
+        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel2.setFont(new java.awt.Font("Dialog", 3, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setText("SELECCIONA LA OPCIÓN QUE DESEA REALIZAR");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 290, 30));
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Dialog", 3, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setText("BIENVENIDO AL PROGRAMA");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 420, 190));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void relacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacionesActionPerformed
         // TODO add your handling code here:
+        
         this.setVisible(false);
-        Ventana3 v3 = new Ventana3(g, direccion_archivo);
+        Ventana3 v3 = new Ventana3(g);
 
     }//GEN-LAST:event_relacionesActionPerformed
-
+   
+    
     private void usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        Ventana_2 v1 = new Ventana_2(g, direccion_archivo);
+        Ventana_2 v1 = new Ventana_2(g);
 
     }//GEN-LAST:event_usersActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         try {
-            Ventana n = new Ventana(this.grafo, direccion_archivo);
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
         ArchivoTxt archivoTxt = new ArchivoTxt();
-        try {
-            
-            g = archivoTxt.LectorChooser(g);
+            Grafos b = new Grafos(2);
+            g = archivoTxt.LectorChooser(b);
   
         } catch (IOException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,9 +154,12 @@ public class Ventana extends javax.swing.JFrame {
     private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
       try {
           GraficarG graficarG = new GraficarG();
-        graficarG.graficar(g);} catch(Exception e){
+        graficarG.graficar(g);}
+      
+      catch(Exception e){
           System.out.println(e); 
         }
+      g.kosaraju();
     }//GEN-LAST:event_graficarActionPerformed
 
     /**
@@ -158,7 +193,7 @@ public class Ventana extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Ventana(g, direccion_archivo).setVisible(true);
+                    new Ventana(g).setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -169,6 +204,11 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;
     private javax.swing.JButton graficar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton relaciones;
     private javax.swing.JButton users;
