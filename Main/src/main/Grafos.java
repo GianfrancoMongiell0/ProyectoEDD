@@ -4,10 +4,6 @@
  */
 package main;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 
 /**
  *
@@ -21,10 +17,6 @@ public class Grafos {
     public Grafos(int max) {
         this.usuarios = new Listas[max];
         this.max_usuarios = max;
-    }
-
-    Grafos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public Listas[] getUsuarios() {
@@ -71,36 +63,39 @@ public class Grafos {
     }
 
     public void eliminar_usuarios(String dato) {
-        for (int n = 0; n < max_usuarios; n++) {
-            if (this.usuarios[n].primero != null && this.usuarios[n].primero.getUsuario().equals(dato)) {
+            for (int n = 0; n < max_usuarios; n++) {
+                if (this.usuarios[n] != null){
+         if (this.usuarios[n].primero != null && this.usuarios[n].primero.getUsuario().equals(dato)) {
                 this.usuarios[n].primero = null;
-            } else {
-                NodE aux = new NodE(dato);
-                this.usuarios[n].delete(aux.getUsuario());
+         }else{
+                    NodE aux = new NodE(dato);
+                    this.usuarios[n].delete(aux.getUsuario());
             }
         }
     }
-
+}
     public void eliminar_seguidor(String usuario, String seguidor){
         Listas us = null;
         boolean encontrado = false;
-        for (int i = 0; i < max_usuarios; i++) {
-            if(usuarios[i].primero.getUsuario().equals(usuario)){
-                us = usuarios[i];
-        }else if (usuarios[i].primero.getUsuario().equals(seguidor)){
+        for (int n = 0; n < max_usuarios; n++) {
+            if(this.usuarios[n] != null && this.usuarios[n].getPrimero()!= null){
+            if(this.usuarios[n].primero.getUsuario().equals(usuario)){
+                us = usuarios[n];
+        }else if (usuarios[n].primero.getUsuario().equals(seguidor)){
             encontrado = true;
         }
             if (encontrado && us!=null){break;}
         }
         if (encontrado && us!=null){
         us.delete(seguidor);}
+        }
     }
 
   
     public void nuevo_seguidor(String dato, String seguidor) {
         for (int n = 0; n < max_usuarios; n++) {
             
-            if (this.usuarios[n]!= null && this.usuarios[n].primero.getUsuario().equals(dato)) {
+            if (this.usuarios[n]!= null && this.usuarios[n].getPrimero() != null && this.usuarios[n].primero.getUsuario().equals(dato)) {
 
                 NodE aux = new NodE(seguidor);
                 this.usuarios[n].insertar_fin(aux.getUsuario());
@@ -112,11 +107,11 @@ public class Grafos {
     public String imprimir_grafo() {
         String finalString = "usuarios\n";
         for (int n = 0; n < max_usuarios; n++) {
-            if (this.usuarios[n] != null) {
+            if (this.usuarios[n]!= null && this.usuarios[n].getPrimero()!=null){
                 finalString+= this.usuarios[n].getPrimero().getUsuario() + "\n";}}
         
          for (int n = 0; n < max_usuarios; n++) {
-            if (this.usuarios[n] != null) {      
+            if (this.usuarios[n]!= null && this.usuarios[n].getPrimero()!=null) {      
                 NodE aux = (NodE) this.usuarios[n].getPrimero().getSiguiente();
                 while(aux!= null){
                     finalString +=  this.usuarios[n].getPrimero().getUsuario() + ", " + aux.getUsuario() + "\n";
@@ -126,79 +121,76 @@ public class Grafos {
          }
          return finalString;
     }
-public NodE[][] kosaraju() {
-    NodE[][] components;
-    int numberOfComponents = 0;
-    NodE[] stack = new NodE[max_usuarios];
-    boolean[] visited = new boolean[max_usuarios];
+       public Listas[] kosaraju() {
+    Listas[] components = new Listas[max_usuarios];
+    int componentIndex = 0;
 
-    // Step 1: Perform depth-first search (DFS) and push nodes onto the stack
-    int stackPointer = 0;
+    int[] num = new int[max_usuarios];
+    int numIndex = 0;
+    boolean[] visited = new boolean[max_usuarios];
     for (int i = 0; i < max_usuarios; i++) {
         if (usuarios[i] != null && !visited[i]) {
-            dfs(i, visited, stack, stackPointer);
+            dfs(i, visited, num, numIndex);
         }
     }
 
-    // Step 2: Transpose the graph
+   
     Grafos transposedGraph = transpose();
 
-    // Step 3: Perform DFS on the transposed graph while popping from the stack
     visited = new boolean[max_usuarios];
-    components = new NodE[max_usuarios][];
-    while (stackPointer > 0) {
-        NodE node = stack[--stackPointer];
-        int index = getIndexFromUsuario(node.getUsuario());
-        if (!visited[index]) {
-            NodE[] component = dfs(index, visited, transposedGraph);
-            components[numberOfComponents++] = component;
+    while (numIndex > 0) {
+        int nodeIndex = num[--numIndex];
+        if (!visited[nodeIndex]) {
+            Listas component = new Listas();
+            dfs(nodeIndex, visited, component);
+            components[componentIndex++] = component;
         }
     }
 
-    // Resize components array to remove unused slots
-    NodE[][] resizedComponents = new NodE[numberOfComponents][];
-    System.arraycopy(components, 0, resizedComponents, 0, numberOfComponents);
+    if (componentIndex < components.length) {
+        Listas[] trimmedComponents = new Listas[componentIndex];
+        System.arraycopy(components, 0, trimmedComponents, 0, componentIndex);
+        components = trimmedComponents;
+    }
 
-    return resizedComponents;
+    return components;
 }
 
-private void dfs(int index, boolean[] visited, NodE[] stack, int stackPointer) {
+private void dfs(int index, boolean[] visited, int[] num1, int num1Index) {
     visited[index] = true;
     NodE node = usuarios[index].getPrimero();
     while (node != null) {
         int neighborIndex = getIndexFromUsuario(node.getUsuario());
         if (!visited[neighborIndex]) {
-            stack[stackPointer++] = node;
-            dfs(neighborIndex, visited, stack, stackPointer);
+            num1[num1Index++] = neighborIndex;
+            dfs(neighborIndex, visited, num1, num1Index);
         }
         node = node.getSiguiente();
     }
 }
 
-private NodE[] dfs(int index, boolean[] visited, Grafos transposedGraph) {
+private void dfs(int index, boolean[] visited, Listas component) {
     visited[index] = true;
-    List<NodE> component = new ArrayList<>();
     if (usuarios[index] != null) {
-        component.add(usuarios[index].getPrimero());
+        component.insertar_fin(usuarios[index].getPrimero().getUsuario());
         NodE node = usuarios[index].getPrimero().getSiguiente();
         while (node != null) {
             int neighborIndex = getIndexFromUsuario(node.getUsuario());
             if (!visited[neighborIndex]) {
-                component.addAll(Arrays.asList(dfs(neighborIndex, visited, transposedGraph)));
+                dfs(neighborIndex, visited, component);
             }
             node = node.getSiguiente();
         }
     }
-    return component.toArray(new NodE[0]);
 }
 
 private Grafos transpose() {
     Grafos transposedGraph = new Grafos(max_usuarios);
-    for (int i = 0; i < max_usuarios; i++) {
-        if (usuarios[i] != null) {
-            NodE node = usuarios[i].getPrimero();
+    for (int n = 0; n < max_usuarios; n++) {
+        if (usuarios[n] != null) {
+            NodE node = usuarios[n].getPrimero();
             while (node != null) {
-                transposedGraph.nuevo_seguidor(node.getUsuario(), usuarios[i].getPrimero().getUsuario());
+                transposedGraph.nuevo_seguidor(node.getUsuario(), usuarios[n].getPrimero().getUsuario());
                 node = node.getSiguiente();
             }
         }
@@ -207,11 +199,12 @@ private Grafos transpose() {
 }
 
 private int getIndexFromUsuario(String usuario) {
-    for (int i = 0; i < max_usuarios; i++) {
-        if (usuarios[i] != null && usuarios[i].getPrimero().getUsuario().equals(usuario)) {
-            return i;
+    for (int n = 0; n < max_usuarios; n++) {
+        if (this.usuarios[n] != null && this.usuarios[n].getPrimero()!= null && this.usuarios[n].getPrimero().getUsuario().equals(usuario)) {
+            return n;
         }
     }
-    return -1; // If the usuario is not found
+    return -1;
+    }
 }
-}
+

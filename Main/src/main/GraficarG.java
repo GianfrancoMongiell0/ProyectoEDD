@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
-import java.util.List;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
@@ -30,7 +29,7 @@ public class GraficarG {
 
     // Recorrer los nodos y agregarlos al grafo
     for (int n = 0; n < grafo.max_usuarios; n++) {
-        if (grafo.getUsuarios()[n] != null) {
+        if (grafo.getUsuarios()[n] != null && grafo.getUsuarios()[n].getPrimero() != null) {
             String usuario = grafo.getUsuarios()[n].getPrimero().getUsuario();
             Node nodo = g.addNode(usuario);
             nodo.setAttribute("ui.label", usuario);
@@ -39,7 +38,7 @@ public class GraficarG {
 
     // Recorrer las relaciones y agregar las aristas
     for (int n = 0; n < grafo.max_usuarios; n++) {
-        if (grafo.getUsuarios()[n] != null) {
+        if (grafo.getUsuarios()[n] != null && grafo.getUsuarios() [n].getPrimero() != null) {
             String usuario = grafo.getUsuarios()[n].getPrimero().getUsuario();
             NodE aux = grafo.getUsuarios()[n].getPrimero().getSiguiente();
 

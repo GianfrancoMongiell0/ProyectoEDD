@@ -63,7 +63,7 @@ public class Listas {
     }
 
     public void delete(String dato) {
-        NodE aux = primero;
+        NodE aux = this.primero;
         
         boolean encontrado = false;
         while(aux != null){

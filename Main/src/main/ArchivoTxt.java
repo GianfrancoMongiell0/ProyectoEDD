@@ -125,24 +125,23 @@ public class ArchivoTxt {
         }
         return usuarios;
 
-
 }
     public void escribirEnArchivo(Grafos grafo, String nombreArchivo) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
             // Escribir la lista de usuarios
             writer.println("usuarios");
-            for (int i = 0; i < grafo.max_usuarios; i++) {
-                if (grafo.getUsuarios()[i] != null) {
-                    writer.println(grafo.getUsuarios()[i].getPrimero().getUsuario());
+            for (int n = 0; n < grafo.max_usuarios; n++) {
+                if (grafo.getUsuarios()[n] != null && grafo.getUsuarios()[n].getPrimero()!= null) {
+                    writer.println(grafo.getUsuarios()[n].getPrimero().getUsuario());
                 }
             }
 
             // Escribir las relaciones
             writer.println("relaciones");
-            for (int i = 0; i < grafo.max_usuarios; i++) {
-                if (grafo.getUsuarios()[i] != null) {
-                    String usuario = grafo.getUsuarios()[i].getPrimero().getUsuario();
-                    NodE aux = grafo.getUsuarios()[i].getPrimero().getSiguiente();
+            for (int n = 0; n < grafo.max_usuarios; n++) {
+                if (grafo.getUsuarios()[n] != null && grafo.getUsuarios()[n].getPrimero()!= null) {
+                    String usuario = grafo.getUsuarios()[n].getPrimero().getUsuario();
+                    NodE aux = grafo.getUsuarios()[n].getPrimero().getSiguiente();
 
                     while (aux != null) {
                         writer.println(usuario + ", " + aux.getUsuario());
