@@ -1,30 +1,31 @@
 package main;
 
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Asus
  */
 public class Ventana_2 extends javax.swing.JFrame {
+
     public static Grafos g;
     public static String direccion_archivo;
     ArchivoTxt a = new ArchivoTxt();
+
     /**
      * Creates new form Ventana_2
      */
     public Ventana_2(Grafos grafos) {
         initComponents();
         this.setVisible(true);
-        g=grafos;
+        g = grafos;
     }
 
     /**
@@ -110,23 +111,22 @@ public class Ventana_2 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-               String u =  a.validar(usuario.getText());
+        String u = a.validar(usuario.getText());
 
         NodE nodo = new NodE(u);
         g.insertar_usuario(nodo);
         g.imprimir_grafo();
         a.escribirEnArchivo(g, "usuarios.txt");
-       
 
 //        a.EscribirTxt(direccion_archivo);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         try {
-            Ventana v  = new Ventana(g);
+            Ventana v = new Ventana(g);
         } catch (IOException ex) {
             Logger.getLogger(Ventana_2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -134,11 +134,18 @@ public class Ventana_2 extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-       String u =  a.validar(usuario.getText());
-        g.eliminar_usuarios(u);
+        String u = a.validar(usuario.getText());
+//        try {
+//            if (u.length() != 0) {
+//                g.eliminar_usuarios(u);
+//
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Por favor ingrese el usuario que desea eliminar" , "ATENCION", 2);
+//        }
+g.eliminar_usuarios(u);
         g.imprimir_grafo();
-                a.escribirEnArchivo(g, "usuarios.txt");
-
+        a.escribirEnArchivo(g, "usuarios.txt");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

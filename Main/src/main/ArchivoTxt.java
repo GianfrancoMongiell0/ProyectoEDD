@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package main;
 
 import java.io.BufferedReader;
@@ -27,22 +24,17 @@ public class ArchivoTxt {
         
         jfc.setCurrentDirectory(new File("C:\\Users\\usuario\\Desktop"));
 
-// Mostrar el diálogo de selección de archivos y obtener el valor de retorno
         int resultado = jfc.showOpenDialog(null);
 
-// Si el usuario ha aceptado la operación
         if (resultado == JFileChooser.APPROVE_OPTION) {
-// Obtener el archivo seleccionado
             File archivo = jfc.getSelectedFile();
 
-// Crear un objeto BufferedReader para leer el archivo
             try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-// Leer las líneas del archivo y mostrarlas por pantalla
 
                 String linea;
                 while ((linea = br.readLine()) != null) {
                     if (linea.contains("@") && !linea.contains(",")) {
-                    NodE nodito = new NodE(linea.trim()); // trim() elimina espacios en blanco al principio y al final
+                    NodE nodito = new NodE(linea.trim()); 
                     grafito.insertar_usuario(nodito);
                     linea = " ";
     }           else if (linea.contains("@") && linea.contains(",")) {
@@ -63,7 +55,6 @@ public class ArchivoTxt {
                 JOptionPane.showMessageDialog(null, "Cargado exitosamente");
             } catch (IOException e) {
                 System.out.println(e);
-// Manejar la excepción de entrada/salida
                 e.printStackTrace();
             }
         }
