@@ -88,9 +88,8 @@ public class Grafos {
         }
         if (encontrado && us!=null){
         us.delete(seguidor);}
-        }
     }
-
+}
   
     public void nuevo_seguidor(String dato, String seguidor) {
         for (int n = 0; n < max_usuarios; n++) {

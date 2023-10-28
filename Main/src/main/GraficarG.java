@@ -23,7 +23,6 @@ public class GraficarG {
 
     Graph g = new SingleGraph("grafo");
 
-    // Define the style of the graph
     g.setAttribute("ui.stylesheet", "node { shape: circle; fill-color: #ADD8E6; text-color: #000000; size: 30px; }"
             + "edge { size: 2px; shape: line; fill-color: #D3D3D3; }");
 

@@ -12,15 +12,13 @@ usuarios
 @radiogaga
 @cipriano
 @newageforever
-@cris
-@gian
 relaciones
 @pepe, @mazinger
 @mazinger, @juanc
 @mazinger, @tuqui33
-@juanc, @sancho23
-@xoxojaime, @pepe
 @tuqui33, @xoxojaime
+@xoxojaime, @pepe
+@juanc, @sancho23
 @sancho23, @mazinger
 @sancho23, @terciopelo
 @terciopelo, @juanc
@@ -28,11 +26,9 @@ relaciones
 @terciopelo, @caribedoble
 @caribedoble, @africa
 @africa, @cipriano
+@cipriano, @totalfree
+@cipriano, @radiogaga
 @totalfree, @africa
 @totalfree, @radiogaga
 @radiogaga, @caribedoble
-@cipriano, @totalfree
-@cipriano, @radiogaga
-@cris, @gian
-@cris, @pepe
-@gian, @pepe
+
