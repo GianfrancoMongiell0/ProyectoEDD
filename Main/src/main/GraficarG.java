@@ -15,14 +15,10 @@ import org.graphstream.ui.view.Viewer;
  */
 public class GraficarG {
     
-     Listas[] usuarios;
-    int max_usuarios;
-    
    public void graficar(Grafos grafo) {
     System.setProperty("org.graphstream.ui", "org.graphstream.ui.swing");
-
     Graph g = new SingleGraph("grafo");
-
+    
     g.setAttribute("ui.stylesheet", "node { shape: circle; fill-color: #ADD8E6; text-color: #000000; size: 30px; }"
             + "edge { size: 2px; shape: line; fill-color: #D3D3D3; }");
 
@@ -61,15 +57,15 @@ Viewer viewer = g.display();
 private void changeEdgeColorForComponent(Graph g, Listas component) {
     NodE node = component.getPrimero();
     NodE nextNode = (node != null) ? node.getSiguiente() : null;
-    
+
     while (nextNode != null) {
         Edge edge = g.getEdge(node.getUsuario() + "-" + nextNode.getUsuario());
         if (edge != null) {
             edge.setAttribute("ui.style", "fill-color: red;");
         }
-        
+
         node = nextNode;
         nextNode = node.getSiguiente();
-        }
     }
+}
 }

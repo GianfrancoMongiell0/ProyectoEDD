@@ -206,4 +206,3 @@ private int getIndexFromUsuario(String usuario) {
     return -1;
     }
 }
-
