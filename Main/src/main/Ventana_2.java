@@ -1,25 +1,33 @@
 package main;
 
-
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+
+/**
+
+ * Esta ventana define la ventana del apartado de usuarios
+
+ * @author: Cristian Fazio
+
+ * @version: 26/10/23
+
  */
 
 public class Ventana_2 extends javax.swing.JFrame {
+
     public static Grafos g;
     public static String direccion_archivo;
     ArchivoTxt a = new ArchivoTxt();
-  
+
     public Ventana_2(Grafos grafos) {
         initComponents();
         this.setVisible(true);
-        g=grafos;
+        g = grafos;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -94,62 +102,44 @@ public class Ventana_2 extends javax.swing.JFrame {
 
     private void usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioActionPerformed
     }//GEN-LAST:event_usuarioActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-               String u =  a.validar(usuario.getText());
 
-        NodE nodo = new NodE(u);
+        String u = a.validar(usuario.getText());
+
+        if (usuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se puede agregar un usuario vacio", "ADVERTENCIA", 2);
+        } else{
+            NodE nodo = new NodE(u);
         g.insertar_usuario(nodo);
         g.imprimir_grafo();
         a.escribirEnArchivo(g, "usuarios.txt");
-       
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       
         this.setVisible(false);
         try {
-            Ventana v  = new Ventana(g);
+            Ventana v = new Ventana(g);
         } catch (IOException ex) {
             Logger.getLogger(Ventana_2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-       String u =  a.validar(usuario.getText());
+   
+        String u =  a.validar(usuario.getText());
+        if (usuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se puede eliminar un usuario vacio", "ADVERTENCIA", 2);
+        } else{
         g.eliminar_usuarios(u);
         g.imprimir_grafo();
-                a.escribirEnArchivo(g, "usuarios.txt");
+        a.escribirEnArchivo(g, "usuarios.txt");
 
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventana_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventana_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventana_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventana_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
+    }//GEN-LAST:event_jButton3ActionPerformed
+    public static void main(String args[]) {
+     
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Ventana_2(g).setVisible(true);
@@ -166,4 +156,6 @@ public class Ventana_2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
+
 }
+// Cierres de la ventana 2

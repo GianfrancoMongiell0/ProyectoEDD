@@ -1,18 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package main;
 
 /**
  *
- * @author Asus
+ * Esta clase define las listas y sus metodos
+ *
+ * @author: Cristian Fazio
+ *
+ * @version: 24/10/23
  */
 public class Listas {
+// Campos de la clase
 
     NodE primero;
     int size;
 
+    /**
+     *
+     * Constructor para las listas
+     *
+     */
     public Listas() {
         this.primero = null;
         this.size = 0;
@@ -34,6 +40,11 @@ public class Listas {
         this.size = size;
     }
 
+    /**
+     *
+     * Método que permite agregar un nodo al final de la lista
+     *
+     */
     public void insertar_fin(String dato) {
         NodE nuevo = new NodE(dato);
         NodE aux = primero;
@@ -46,10 +57,23 @@ public class Listas {
             aux.setSiguiente(nuevo);
             size++;
         }
-    }
-    public boolean IsEmpty(){
+    }//Cierre del metodo
+
+    /**
+     *
+     * Método que permite ver si la lista es vacia
+     *
+     * @return si la lista contiene alguna informacion      *
+     */
+    public boolean IsEmpty() {
         return this.primero == null;
-    }
+    }//Cierre del metodo
+
+    /**
+     *
+     * Método que borrar un dato de la lista
+     *
+     */
     public void insertar_in(NodE nuevo) {
 
         if (primero == null) {
@@ -60,26 +84,30 @@ public class Listas {
             primero = nuevo;
             size++;
         }
-    }
+    }//Cierre del metodo
 
     public void delete(String dato) {
         NodE aux = this.primero;
-        
+
         boolean encontrado = false;
-        while(aux != null){
-            if(aux.getSiguiente()!= null && aux.getSiguiente().getUsuario().equals(dato)){
+        while (aux != null) {
+            if (aux.getSiguiente() != null && aux.getSiguiente().getUsuario().equals(dato)) {
                 encontrado = true;
                 break;
             }
             aux = aux.getSiguiente();
         }
-        if (encontrado){
+        if (encontrado) {
             aux.setSiguiente(aux.getSiguiente().getSiguiente());
         }
-        
-        
-    }
 
+    }//Cierre del metodo
+
+    /**
+     *
+     * Método que permite buscar por el dato en la lista
+     *
+     */
     public NodE search(String dato) {
         if (primero.getUsuario().equals(dato)) {
             return primero;
@@ -90,8 +118,13 @@ public class Listas {
             }
             return aux;
         }
-    }
+    }//Cierre del metodo
 
+    /**
+     *
+     * Método que permite imprimir la lista
+     *
+     */
     public void imprimir() {
         NodE aux = primero;
         while (aux != null) {
@@ -99,4 +132,6 @@ public class Listas {
             aux = aux.getSiguiente();
         }
     }
-}
+}//Cierre del metodo
+
+// Cierre de la clase listaslistas

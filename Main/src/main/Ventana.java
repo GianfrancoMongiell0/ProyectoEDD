@@ -4,15 +4,17 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 /**
  *
- * @author Asus
+ * Esta ventana define la ventana principal
+ *
+ * @author: Cristian Fazio
+ *
+ * @version: 26/10/23
+ *
  */
 public class Ventana extends javax.swing.JFrame {
+// Campos de la clase
 
     public static Grafos g;
     public static String direccion_archivo;
@@ -25,8 +27,8 @@ public class Ventana extends javax.swing.JFrame {
         this.setVisible(true);
         g = grafos;
         ArchivoTxt a = new ArchivoTxt();
-}
-    
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -125,13 +127,13 @@ public class Ventana extends javax.swing.JFrame {
 
     private void relacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacionesActionPerformed
         // TODO add your handling code here:
-        
+
         this.setVisible(false);
         Ventana3 v3 = new Ventana3(g);
 
     }//GEN-LAST:event_relacionesActionPerformed
-   
-    
+
+
     private void usersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usersActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -141,10 +143,10 @@ public class Ventana extends javax.swing.JFrame {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         try {
-        ArchivoTxt archivoTxt = new ArchivoTxt();
+            ArchivoTxt archivoTxt = new ArchivoTxt();
             Grafos b = new Grafos(2);
             g = archivoTxt.LectorChooser(b);
-  
+
         } catch (IOException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -152,14 +154,13 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarActionPerformed
 
     private void graficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarActionPerformed
-      try {
-          GraficarG graficarG = new GraficarG();
-        graficarG.graficar(g);}
-      
-      catch(Exception e){
-          System.out.println(e); 
+        try {
+            GraficarG graficarG = new GraficarG();
+            graficarG.graficar(g);
+        } catch (Exception e) {
+            System.out.println(e);
         }
-      g.kosaraju();
+        g.kosaraju();
     }//GEN-LAST:event_graficarActionPerformed
 
     /**
@@ -214,3 +215,4 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton users;
     // End of variables declaration//GEN-END:variables
 }
+// Cierre de la ventana principal
