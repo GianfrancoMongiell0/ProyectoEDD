@@ -1,4 +1,3 @@
-
 package main;
 
 import java.io.BufferedReader;
@@ -13,15 +12,22 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author gianf
+ * Esta clase define el uso de los archivos TXT para su debido amejo
+ *
+ * @author: Gianfranco Mongiello
+ *
+ * @version: 24/10/23
+ *
  */
 public class ArchivoTxt {
-    
-    public ArchivoTxt(){}
+ /**
 
-    public Grafos LectorChooser(Grafos grafito) throws FileNotFoundException, IOException{
-   JFileChooser jfc = new JFileChooser();
-        
+     * Método que permite buscar el archivo txt para guardar los datos
+
+     */
+    public Grafos LectorChooser(Grafos grafito) throws FileNotFoundException, IOException {
+        JFileChooser jfc = new JFileChooser();
+
         jfc.setCurrentDirectory(new File("C:\\Users\\usuario\\Desktop"));
 
         int resultado = jfc.showOpenDialog(null);
@@ -34,23 +40,24 @@ public class ArchivoTxt {
                 String linea;
                 while ((linea = br.readLine()) != null) {
                     if (linea.contains("@") && !linea.contains(",")) {
-                    NodE nodito = new NodE(linea.trim()); 
-                    grafito.insertar_usuario(nodito);
-                    linea = " ";
-    }           else if (linea.contains("@") && linea.contains(",")) {
-                    String[] parte = linea.split(",");
+                        NodE nodito = new NodE(linea.trim());
+                        grafito.insertar_usuario(nodito);
+                        linea = " ";
+                    } else if (linea.contains("@") && linea.contains(",")) {
+                        String[] parte = linea.split(",");
                         if (parte.length == 2) {
-                    String parte1 = parte[0].trim();
-                    String parte2 = parte[1].trim();
-                    grafito.nuevo_seguidor(parte1, parte2);
-        }
-    
-                    } else if(linea.contains("@") && linea.contains(","))  {
-                    String[] parte = linea.split(",");  
-                    String parte1 = parte[0];
-                    String parte2 = parte[1];
-                    grafito.nuevo_seguidor(parte1, parte2);}
-                        
+                            String parte1 = parte[0].trim();
+                            String parte2 = parte[1].trim();
+                            grafito.nuevo_seguidor(parte1, parte2);
+                        }
+
+                    } else if (linea.contains("@") && linea.contains(",")) {
+                        String[] parte = linea.split(",");
+                        String parte1 = parte[0];
+                        String parte2 = parte[1];
+                        grafito.nuevo_seguidor(parte1, parte2);
+                    }
+
                 }
                 JOptionPane.showMessageDialog(null, "Cargado exitosamente");
             } catch (IOException e) {
@@ -59,14 +66,18 @@ public class ArchivoTxt {
             }
         }
         return grafito;
-    }
-    
+    }//Cierre del metodo
+ /**
+
+     * Método que permite escribir sobre el txt
+
+     */
     public void EscribirTxt(Listas usuarios) {
         String UsuariosActuales = "";
         if (!usuarios.IsEmpty()) {
             NodE pAux = usuarios.getPrimero();
             for (int i = 0; i < usuarios.getSize(); i++) {
-                UsuariosActuales += pAux.getUsuario()+ "\n";
+                UsuariosActuales += pAux.getUsuario() + "\n";
                 pAux = pAux.getSiguiente();
             }
         }
@@ -74,14 +85,18 @@ public class ArchivoTxt {
             PrintWriter pw = new PrintWriter("test\\usuarios.txt");
             pw.print(UsuariosActuales);
             pw.close();
-            
+
             JOptionPane.showMessageDialog(null, "Guardado exitoso");
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "ERROR", 0);
         }
-    }
+    }//Cierre del metodo
+ /**
 
+     * Método que leer el txt
+
+     */
     public Listas LeerTxt() {
         Listas usuarios = new Listas();
         String line;
@@ -116,8 +131,14 @@ public class ArchivoTxt {
         }
         return usuarios;
 
+    }//Cierre del metodo
 
-}
+     /**
+
+     * Método que perimite escribir sobre el txt seleccionado
+
+     */
+    
     public void escribirEnArchivo(Grafos grafo, String nombreArchivo) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
             // Escribir la lista de usuarios
@@ -146,15 +167,14 @@ public class ArchivoTxt {
         } catch (IOException e) {
             System.out.println("Error al escribir en el archivo: " + e.getMessage());
         }
-    }
-    
-    public String validar(String usuario){
+    }//Cierre del metodo
+
+    public String validar(String usuario) {
         String user = usuario;
-        if (!usuario.contains("@")){
-             user = "@" + usuario;
+        if (!usuario.contains("@")) {
+            user = "@" + usuario;
         }
         return user;
-    }
+    }//Cierre del metodo
 }
-
-
+// Cierre de la clase ArchivoTxt

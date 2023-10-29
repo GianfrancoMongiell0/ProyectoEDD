@@ -3,16 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
-
 /**
- *
- * @author Asus
+
+ * Esta clase define las listas y sus metodos
+
+ * @author: Gianfranco Mongiello
+
+ * @version: 24/10/23
+
  */
 public class Listas {
-
+// Campos de la clase
     NodE primero;
     int size;
 
+    /**
+
+     * Constructor para las listas
+     
+     */
     public Listas() {
         this.primero = null;
         this.size = 0;
@@ -33,7 +42,11 @@ public class Listas {
     public void setSize(int size) {
         this.size = size;
     }
+ /**
 
+     * Método que permite agregar un nodo al final de la lista
+
+     */
     public void insertar_fin(String dato) {
         NodE nuevo = new NodE(dato);
         NodE aux = primero;
@@ -47,9 +60,17 @@ public class Listas {
             size++;
         }
     }
+    
+     /**
+
+     * Método que permite ver si la lista es vacia
+     
+     *@return si la lista contiene alguna informacion 
+
+     */
     public boolean IsEmpty(){
         return this.primero == null;
-    }
+    }//Cierre del metodo
     public void insertar_in(NodE nuevo) {
 
         if (primero == null) {
@@ -60,8 +81,12 @@ public class Listas {
             primero = nuevo;
             size++;
         }
-    }
+    }//Cierre del metodo
+ /**
 
+     * Método que borrar un dato de la lista
+
+     */
     public void delete(String dato) {
         NodE aux = primero;
         
@@ -78,8 +103,12 @@ public class Listas {
         }
         
         
-    }
+    }//Cierre del metodo
+ /**
 
+     * Método que permite buscar por el dato en la lista
+
+     */
     public NodE search(String dato) {
         if (primero.getUsuario().equals(dato)) {
             return primero;
@@ -89,14 +118,19 @@ public class Listas {
                 aux = aux.getSiguiente();
             }
             return aux;
-        }
+        }//Cierre del metodo
     }
+ /**
 
+     * Método que permite imprimir la lista
+
+     */
     public void imprimir() {
         NodE aux = primero;
         while (aux != null) {
             System.out.println(aux.getUsuario());
             aux = aux.getSiguiente();
-        }
+        }//Cierre del metodo
     }
 }
+// Cierre de la clase listas

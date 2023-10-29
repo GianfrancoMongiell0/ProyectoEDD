@@ -1,4 +1,14 @@
 package main;
+
+/**
+
+ * Esta clase define el main
+
+ * @author: Gianfranco Mongiello
+
+ * @version: 21/10/23
+
+ */
 import java.io.IOException;
 
 
@@ -9,3 +19,4 @@ public class main {
         Ventana v = new Ventana(grafo);   
     }
 }
+// Cierre del main
