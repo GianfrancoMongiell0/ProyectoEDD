@@ -1,7 +1,5 @@
 package main;
 
-import javax.swing.JTextField;
-
 /**
  *
  * Esta clase se define para la creacion de el grafo y sus metodos
