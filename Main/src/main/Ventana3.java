@@ -138,20 +138,19 @@ public class Ventana3 extends javax.swing.JFrame {
     }//GEN-LAST:event_usuario1ActionPerformed
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
  
-        String u = a.validar(usuario1.getText());
-        String z = a.validar(usuario2.getText());
-        
-        if (usuario1.getText().isEmpty() ||usuario2.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "No se puede relacionar un usuario vacio", "ADVERTENCIA", 2);
-        }else{
-           g.eliminar_seguidor(u, z);
-                        a.escribirEnArchivo(g, "usuarios.txt");
-        this.graf.setText(g.imprimir_grafo());
+String u = a.validar(usuario1.getText());
+String z = a.validar(usuario2.getText());
 
-        g.imprimir_grafo();
+if (usuario1.getText().isEmpty() || usuario2.getText().isEmpty()) {
+    JOptionPane.showMessageDialog(null, "No se puede relacionar un usuario vacío", "ADVERTENCIA", 2);
+} else {
+    g.eliminar_seguidor(u, z);
+    a.escribirEnArchivo(g, "usuarios.txt");
+    this.graf.setText(g.imprimir_grafo());
+    g.imprimir_grafo();
+
+
 //        a.EscribirTxt(direccion_archivo);
-
-
     }//GEN-LAST:event_jButton3ActionPerformed
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

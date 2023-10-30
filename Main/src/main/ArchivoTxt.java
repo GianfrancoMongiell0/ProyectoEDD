@@ -180,7 +180,9 @@ public class ArchivoTxt {
         } catch (IOException e) {
             System.out.println("Error al escribir en el archivo: " + e.getMessage());
         }
-    }//Cierre del metodo
+    }
+
+//Cierre del metodo
     /**
     * 
     * Metodo para validar si el usuario que se ingrese posea el @

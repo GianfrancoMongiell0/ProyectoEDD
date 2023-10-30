@@ -1,4 +1,7 @@
 package main;
+
+import javax.swing.JTextField;
+
 /**
  *
  * Esta clase se define para la creacion de el grafo y sus metodos
@@ -97,27 +100,38 @@ public class Grafos {
      *
      * Método que permite eliminar un seguidor
      *
+     * @param usuario
+     * @param seguidor
      */
 
-    public void eliminar_seguidor(String usuario, String seguidor) {
-        Listas us = null;
-        boolean encontrado = false;
-        for (int n = 0; n < max_usuarios; n++) {
-            if (this.usuarios[n] != null && this.usuarios[n].getPrimero() != null) {
-                if (this.usuarios[n].primero.getUsuario().equals(usuario)) {
-                    us = usuarios[n];
-                } else if (usuarios[n].primero.getUsuario().equals(seguidor)) {
-                    encontrado = true;
+public void eliminar_seguidor(String usuario, String seguidor) {
+    Listas us = null;
+    boolean encontradoUsuario = false;
+    boolean encontradoSeguidor = false;
+    
+    for (int n = 0; n < max_usuarios; n++) {
+        if (this.usuarios[n] != null) {
+            NodE actual = this.usuarios[n].getPrimero();
+            
+            while (actual != null) {
+                if (actual.getUsuario().equals(usuario)) {
+                    us = this.usuarios[n];
+                    encontradoUsuario = true;
+                } else if (actual.getUsuario().equals(seguidor)) {
+                    encontradoSeguidor = true;
                 }
-                if (encontrado && us != null) {
-                    break;
-                }
-            }
-            if (encontrado && us != null) {
-                us.delete(seguidor);
+                
+                actual = actual.getSiguiente();
             }
         }
-    }//Cierre del metodo
+    }
+    
+    if (encontradoUsuario && encontradoSeguidor && us != null) {
+        us.delete(seguidor);
+    }
+}
+  
+//Cierre del metodo
 
      /**
 
@@ -135,7 +149,8 @@ public class Grafos {
                 break;
             }
         }
-    }//Cierre del metodo
+    }
+//Cierre del metodo
  /**
 
      * Método que permite imprimir el grafo
